@@ -1,0 +1,7 @@
+# Assumptions made during the project
+
+1. User Managemnet module and Organisation modules were already implemeneted.
+2. GET and PUT calls are already implemeneted in forms, question and response apis.
+3. We need to integrate only the google spread sheet service.
+4. consumer and services module are in differnt Micorservice.
+5. User will share the spreadsheet ID and title for integrating google sheet app.

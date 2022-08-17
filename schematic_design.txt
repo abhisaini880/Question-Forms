@@ -1,0 +1,77 @@
+<---------------------------------- SCHEMATIC DESIGN (MONGO) -------------------------------->
+
+# ORGANISATION collection document schema
+
+{
+    _id: objectId(ORGANISATION)
+    name: STRING, 
+    created_by: objectId(USER),
+    created_at: DATE_TIME,
+    active: BOOLEAN
+    forms_count: INT, 
+    forms: ARRAY[objectId(FORM)]
+    members: ARRAY[objectId[USER]]
+}
+
+# USER collection document schema
+
+{
+    _id: objectId(USER)
+    name: STRING, 
+    created_at: DATE_TIME,
+    active: BOOLEAN
+}
+
+# FORM collection document schema
+
+{
+    _id: objectId(FORM)
+    org_id: objectId(ORGANISATION)
+    title: STRING, 
+    created_by: objectId(USER),
+    published_by: objectId(USER),
+    created_at: DATE_TIME,
+    published_at: DATE_TIME,
+    active: BOOLEAN
+    questions_count: INT, 
+    questions: ARRAY[objectId(QUESTION)],
+    rules: ARRAY[object],
+    apps: ARRAY[object]
+}
+
+# QUESTION collection document schema
+
+{
+    _id: objectId(QUESTION),
+    title: STRING,
+    keyword: STRING,
+    type: DATA_TYPE,
+    mandatory: BOOLEAN,
+    order: INT,
+    conditions: ARRAY[objects],
+    created_at: DATE_TIME,
+    created_by: objectId(USER)
+}
+
+# RESPONSE collection document schema
+
+{
+    _id: objectId(RESPONSE),
+    form_id: objectId(FORM),
+    user_meta: {
+        ip: STRING,
+        browser: STRING,
+        device: STRING,
+        opertaor: STRING
+    },
+    response_time: FLOAT,
+    submitted_at: DATE_TIME,
+    submitted_by: objectId(USER),
+    answers: [
+        {
+            question_id: objectId(QUESTION),
+            question_title: STRING
+            answer: ANY
+        }
+    ]
+}

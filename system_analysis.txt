@@ -1,0 +1,40 @@
+# System Approaches
+
+1. Monolith architecture with sql database
+
+pros: 
+    - Easy to maintain
+    - sql will provide ACID transactions
+    - sql provides string consistency
+
+cons:
+    - hard to work with json data in SQL
+    - system was not failure proof.
+    - while calling service, if third party api fails then response data will be lost.
+
+
+2. Micorservice architecture with no-sql database
+
+pros:
+    - Failure proof with the use of message queues.
+    - Easy to extend services package.
+    - easily query and aggregate json data with no-sql
+
+cons:
+    - no-sql provides eventual consistency.
+    - text based searching over the no-sql database can increase latency of system.
+  
+3. Micorservice architecture with no-sql(MONGO) database and Elasticsearch search engine
+
+pros:
+    - Fast searching over the text.
+    - ES and Mongo both provides sharding, so both are fault tolerant.
+    - MongoDB is used for storage, and ElasticSearch is used to perform full-text indexing over the data.
+    - Failure proof with the use of message queues.
+    - Easy to extend services package.
+    - easily query and aggregate json data with no-sql
+
+cons:
+    - Elasticsearch doesn't gaurantee consistency, so we need to sync data from mongo and
+    use ES only for text based searching.
+    - system will be eventually consistent but fault tolerant and available.
